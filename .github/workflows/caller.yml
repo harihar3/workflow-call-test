@@ -11,5 +11,3 @@ on:
 jobs:
   test:
     uses: ./.github/workflows/reusable.yml
-    with:
-      trigger-event: ${{ github.event_name }}
