@@ -1,0 +1,25 @@
+name: Reusable Workflow
+
+on:
+  workflow_call:
+    inputs:
+      trigger-event:
+        required: true
+        type: string
+
+jobs:
+  tf_plan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: TEST Plan
+        run: |
+          echo "terraform plan running"
+
+  tf_apply:
+    if: ${{ inputs.trigger-event == 'push' && github.ref == 'refs/heads/main' }}
+    needs: tf_plan
+    runs-on: ubuntu-latest
+    steps:
+      - name: TEST Apply
+        run: |
+          echo "terraform apply running"
